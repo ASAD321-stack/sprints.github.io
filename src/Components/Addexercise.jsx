@@ -11,7 +11,7 @@ const Addexercise = ({addItems}) => {
     const [description, setDescription] = useState('nice play')
    
 
-
+  
     const handleSubmit = (e) =>{
         e.preventDefault();
         addItems([username,date,duration,description]);
