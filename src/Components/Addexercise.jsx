@@ -1,17 +1,59 @@
 import React, { useState } from 'react';
-
+import axios from "axios"
 
 import "./Addexercise.css"
 
 const Addexercise = ({addItems}) => {
 
-    const [list, setlist] = useState('')
+    const [username, setuserName] = useState('')
+    const [date, setDate] = useState('')
+    const [duration, setDuration] = useState(0)
+    const [description, setDescription] = useState('nice play')
+   
+
 
     const handleSubmit = (e) =>{
         e.preventDefault();
-        addItems(list);
-        setlist('');
+        addItems([username,date,duration,description]);
+        setuserName('');
+       
+        axios.post('http://localhost:5000')
+        
+
     }
+
+// const PostData= async(e)=>{
+//     e.preventDefault();
+//     const username=name;
+//     const duration=duration;
+//     const date=date;
+//     const description=description;
+
+//   await fetch('/exercises/add',{
+//     methode: "POST",
+//     headers:{
+//         "Content-Type" : "application/json"
+//     },
+//     body: JSON.stringify({
+
+//         username,duration,date,description
+         
+//     })
+//   });
+//   const data=await res.json();
+
+//   if (res.status === (400)||  !data){
+//       window.alert("invalid registration")
+//       console.log("invalid registration")
+//   }
+   
+  
+    
+
+// }
+
+
+
 
     return (
         <>
@@ -20,7 +62,7 @@ const Addexercise = ({addItems}) => {
             
                    
 
-                   <section id="form-1" style={{padding: "50px"}}>
+            <section id="form-1" style={{padding: "50px"}}>
                 <div className="container-1">
                     <div className="row ">
                         <div className=" col-lg-6 col-md-6 col-sm-12 col-xs-12  col-1">
@@ -33,8 +75,8 @@ const Addexercise = ({addItems}) => {
                                             className="form-control"
                                             id="name"
                                             name="name"
-                                            value={list}
-                                            onChange={e => {setlist(e.target.value)}}
+                                            value={username}
+                                            onChange={e => {setuserName(e.target.value)}}
                                             placeholder="Name" required maxlength="10" />   
                                 </div>
 
@@ -53,17 +95,20 @@ const Addexercise = ({addItems}) => {
 
                                 <div className="form-group">
                                     <label for="duration">Duration  </label>
-                                        <input type="time" className="form-control" id="duration" placeholder="Duration*(mins)" /> 
+                                        <input type="number" className="form-control" id="duration"  value={duration}
+                                            onChange={e => {setDuration(e.target.value)}} placeholder="Duration*(mins)" /> 
                                 </div>
 
                                 <div className="form-group">
                                     <label for="exercise-date">Date and time </label>
-                                        <input type="datetime-local" className="form-control" id="exercise-date" />                                
+                                        <input type="datetime-local"  value={date}
+                                            onChange={e => {setDate(e.target.value)}}className="form-control" id="exercise-date" />                                
                                 </div>
 
-                                <div className="form-group">
+                                <div className="form-group"> 
                                     <label for="exampleFormControlTextarea1">Desciption   </label>
-                                        <textarea className="form-control" id="exampleFormControlTextarea1" rows="2" maxlength="100"></textarea>                
+                                        <textarea className="form-control" id="exampleFormControlTextarea1"  value={description}
+                                            onChange={e => {setDescription(e.target.value)}}rows="2" maxlength="100"></textarea>                
                                 </div>
 
                                 <button type="submit" className="btn"> Add </button>
@@ -102,17 +147,11 @@ const Addexercise = ({addItems}) => {
                                         </div>
                                     
                                 </div>
-                                <button type="submit" className="btn btn-block">Calculate</button>
-
-
+                                <button type="submit" 
+                                className="btn btn-block" >Calculate</button>
 
                             </form>
-
-
                         </div>
-
-
-
 
                     </div>
                 </div>

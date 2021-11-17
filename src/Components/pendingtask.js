@@ -49,7 +49,7 @@ function Pendingtask() {
 
             <ul>
             {items.map(item => (
-               <li key={item.id} style={{listStyle: "none"}}>
+               <li key={item} style={{listStyle: "none"}}>
 
                 <div className=" col-lg-4 col-md-6 col-sm-12 mb-4">
                     <div className="card p-3 mb-2">
