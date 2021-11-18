@@ -7,20 +7,23 @@ const Addexercise = ({addItems}) => {
 
     const [username, setuserName] = useState('')
     const [date, setDate] = useState('')
-    const [duration, setDuration] = useState(0)
+    const [duration, setDuration] = useState('')
     const [description, setDescription] = useState('nice play')
    
 
   
     const handleSubmit = (e) =>{
         e.preventDefault();
-        addItems([username,date,duration,description]);
-        setuserName('');
+      const user= addItems({username,date,duration,description});
        
-        axios.post('http://localhost:5000')
-        
+       axios.post('https://localhost:5000/exercises/add',user
+       )
+           .then(res=> console.log(res.data ))
 
     }
+
+
+   
 
 // const PostData= async(e)=>{
 //     e.preventDefault();
